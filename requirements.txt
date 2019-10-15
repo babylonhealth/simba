@@ -1,0 +1,6 @@
+click
+dcor
+numpy
+scikits.bootstrap
+scipy
+sklearn

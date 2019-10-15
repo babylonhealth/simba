@@ -1,0 +1,75 @@
+# coverage reports
+coverage.xml
+coverage_html_report/
+
+# ignore  python bytecode files anywhere in the tree
+*.pyc
+
+# Eclipse
+.settings
+.metadata
+Servers
+bin
+!lib/mallet-2.0.7/bin
+target
+
+
+# SpringSource Tool Suite
+.springBeans
+
+
+# Netbeans
+/build/
+/dist/
+/nbproject/
+/nbproject/*
+nbbuild.xml
+manifest.mf
+/libs/*.jar
+
+
+# Emacs
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+.elc
+auto-save-list
+tramp
+
+
+# Vim
+*.swp
+*.swo
+
+
+# Textmate
+*.tmproj
+tmtags
+
+
+# OS generated files
+.DS_Store
+ehthumbs.db
+Icon?
+Thumbs.db
+._*
+.Spotlight-V100
+.Trashes
+Desktop.ini
+.*
+!.gitignore
+*~
+*.sw[a-p]
+# KDE
+.directory
+
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
+
+
+# Project-specific files
+data/
+*.egg-info/
