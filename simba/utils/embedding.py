@@ -32,7 +32,7 @@ def _create_dictionary(sequences, threshold=0):
     return id2token, token2id
 
 
-def _get_embedding_map(embedding_path, sequences, path_to_counts=None):
+def _get_embedding_map(embedding_path, sequences, norm=False, path_to_counts=None):
     embedding_map = {}
     token_freq_map = None
     if path_to_counts:
@@ -46,6 +46,8 @@ def _get_embedding_map(embedding_path, sequences, path_to_counts=None):
             token, vec = line.split(' ', 1)
             if token in token2id:
                 np_vector = np.fromstring(vec, sep=' ')
+                if norm:
+                    np_vector = np_vector / np.linalg.norm(np_vector)
                 if token_freq_map:
                     np_vector = _get_token_weight(token, token_freq_map) * np_vector
                 embedding_map[token] = np_vector
@@ -89,10 +91,10 @@ def _get_token_weight(token, token_freq_map, a=1e-3):
     return a / (a + token_freq)
 
 
-def get_embeddings(sequences, embedding, counts_path=None):
+def get_embeddings(sequences, embedding, norm=False, counts_path=None):
     embeddings = []
     embs_path = EMB_MAP[embedding]
-    word_vec, dim = _get_embedding_map(embs_path, sequences, counts_path)
+    word_vec, dim = _get_embedding_map(embs_path, sequences, norm, counts_path)
 
     for seq in sequences:
         seq_vec = []

@@ -19,19 +19,19 @@ gold_scores = [1, 2, 0]
 # Note that the VMF methods require more than one embedding per sequence,
 # so it's advised to pad with an arbitrary (common) word embedding, e.g.
 # '.' or 'the' in the case of text.
+# VMF also requires normalised word vectors.
 sentences1 = [s.split() + ['.'] for s in sentences1]
 sentences2 = [s.split() + ['.'] for s in sentences2]
-embeddings1 = get_embeddings(sentences1, embedding='fasttext')
-embeddings2 = get_embeddings(sentences2, embedding='fasttext')
+embeddings1 = get_embeddings(sentences1, embedding='fasttext', norm=True)
+embeddings2 = get_embeddings(sentences2, embedding='fasttext', norm=True)
 
 # Compute confidence intervals for dynamax compared to cossim.
 all_scores = evaluate_multiple(
     embeddings1,
     embeddings2,
     [
-        # TODO VMF still nan's
-        # von_mises_correction_aic,
-        # von_mises_correction_tic,
+        von_mises_correction_aic,
+        von_mises_correction_tic,
         gaussian_correction_aic,
         gaussian_correction_tic,
         spherical_gaussian_correction_aic,
@@ -39,4 +39,5 @@ all_scores = evaluate_multiple(
     ],
     gold_scores,
 )
-print(all_scores)
+for method, result in all_scores.items():
+    print(f'{method}: {result[0]}')
