@@ -16,6 +16,8 @@ sentences2 = [
 gold_scores = [1, 2, 0]
 
 # Get word embeddings.
+sentences1 = [s.split() for s in sentences1]
+sentences2 = [s.split() for s in sentences2]
 embeddings1 = get_embeddings(sentences1, embedding='fasttext')
 embeddings2 = get_embeddings(sentences2, embedding='fasttext')
 

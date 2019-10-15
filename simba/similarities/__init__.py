@@ -4,11 +4,12 @@ from .correlation import (
     avg_spearman,
     max_spearman,
 )
-from .geometry import avg_cosine
 from .fuzzy import (
     dynamax_dice,
     dynamax_jaccard,
     dynamax_otsuka,
     max_jaccard,
 )
-from .sif import avg_sif, batch_sif
+from .geometry import avg_cosine
+from .mcsg import *
+from .sif import _avg_sif, batch_avg_sif
