@@ -1,5 +1,7 @@
 import click
-from .config import EMB_MAP, logger, save_embedding_map
+
+from .core import register_embeddings, register_frequencies
+from .config import EMB_MAP, FREQ_MAP, print_config
 
 
 @click.group()
@@ -7,25 +9,48 @@ def simba():
     pass
 
 
+@click.group()
+def embs():
+    pass
+
+
+@click.group()
+def freqs():
+    pass
+
+
+@click.command()
+def list_embs():
+    """Print embeddings that have been registered."""
+    print_config(EMB_MAP)
+
+
+@click.command()
+def list_freqs():
+    """Print frequencies that have been registered."""
+    print_config(FREQ_MAP)
+
+
 @click.command()
 @click.option('--name', required=True, help='Name of embedding')
-@click.option('--path', required=True, help='Path to embedding file in w2v txt format')
-def register(name, path):
+@click.option('--path', required=True, help='Path to embedding file')
+def register_emb(name, path):
     """Register a new embeddings file to use."""
-    logger.info(f'Registering {name} from {path}')
-    if name in EMB_MAP:
-        logger.warn(f'Overwriting old value: {EMB_MAP[name]}')
-    EMB_MAP[name] = path
-    save_embedding_map(EMB_MAP)
+    register_embeddings(name, path)
 
 
 @click.command()
-def embeddings():
-    """Print embeddings that have been registered."""
-    max_len = max(len(n) for n in EMB_MAP)
-    for name, path in EMB_MAP.items():
-        print(f'{name:{max_len}} => {path}')
+@click.option('--name', required=True, help='Name of frequencies')
+@click.option('--path', required=True, help='Path to frequency file')
+def register_freq(name, path):
+    """Register a new frequencies file to use."""
+    register_frequencies(name, path)
 
 
-simba.add_command(register)
-simba.add_command(embeddings)
+simba.add_command(embs)
+embs.add_command(list_embs, name='list')
+embs.add_command(register_emb, name='register')
+
+simba.add_command(freqs)
+freqs.add_command(list_freqs, name='list')
+freqs.add_command(register_freq, name='register')

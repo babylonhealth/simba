@@ -1,7 +1,7 @@
 import numpy as np
 
-from simba.utils.gaussian import aic_spherical, tic, tic_spherical
-from simba.utils.vmf import vmf_aic, vmf_tic
+from ..utils.gaussian import aic_spherical, tic, tic_spherical
+from ..utils.vmf import vmf_aic, vmf_tic
 
 
 def von_mises_correction_aic(Dnew, Dc):

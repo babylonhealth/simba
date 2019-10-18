@@ -2,10 +2,13 @@ import io
 
 import numpy as np
 
-from simba.config import EMB_MAP
-
 
 def _create_dictionary(sequences):
+    """
+
+    :param sequences:
+    :return:
+    """
     tokens = {}
     for s in sequences:
         for token in s:
@@ -21,11 +24,19 @@ def _create_dictionary(sequences):
     return id2token, token2id
 
 
-def _get_embedding_map(embedding_path, sequences, norm=False, path_to_counts=None):
+def get_embedding_map(embedding_path, sequences, norm=False, path_to_counts=None):
+    """
+
+    :param embedding_path:
+    :param sequences:
+    :param norm:
+    :param path_to_counts:
+    :return:
+    """
     embedding_map = {}
     token_freq_map = None
     if path_to_counts:
-        token_freq_map = _get_token_freq_map(path_to_counts)
+        token_freq_map = get_token_freq_map(path_to_counts)
     _, token2id = _create_dictionary(sequences)
 
     with io.open(embedding_path, 'r', encoding='utf-8', errors='ignore') as f:
@@ -44,7 +55,7 @@ def _get_embedding_map(embedding_path, sequences, norm=False, path_to_counts=Non
     return embedding_map, dim
 
 
-def _get_token_freq_map(path_to_counts):
+def get_token_freq_map(path_to_counts):
     """
     Loads word counts and calculates word frequencies
     :param path_to_counts: path to word frequency file
@@ -78,21 +89,3 @@ def _get_token_weight(token, token_freq_map, a=1e-3):
     """
     token_freq = token_freq_map.get(token, 0.0)
     return a / (a + token_freq)
-
-
-def get_embeddings(sequences, embedding, norm=False, counts_path=None):
-    embeddings = []
-    embs_path = EMB_MAP[embedding]
-    word_vec, dim = _get_embedding_map(embs_path, sequences, norm, counts_path)
-
-    for seq in sequences:
-        seq_vec = []
-        for token in seq:
-            if token in word_vec:
-                seq_vec.append(word_vec[token])
-        if not seq_vec:
-            vec = np.zeros(dim)
-            seq_vec.append(vec)
-        embeddings.append(seq_vec)
-
-    return embeddings

@@ -1,7 +1,7 @@
 from scipy.stats import pearsonr
 
 from simba.similarities import batch_avg_sif
-from simba.utils.embedding import get_embeddings
+from simba.core import embed
 
 # A very useful dataset.
 sentences1 = [
@@ -19,10 +19,8 @@ gold_scores = [1, 2, 0]
 # Get word embeddings.
 sentences1 = [s.split() for s in sentences1]
 sentences2 = [s.split() for s in sentences2]
-embeddings1 = get_embeddings(sentences1, embedding='fasttext')
-embeddings2 = get_embeddings(sentences2, embedding='fasttext')
-
-# TODO word frequencies
+embeddings1 = embed(sentences1, embedding='fasttext', frequencies='arora')
+embeddings2 = embed(sentences2, embedding='fasttext', frequencies='arora')
 
 # Evaluate batch methods.
 sif_scores = batch_avg_sif(embeddings1, embeddings2)

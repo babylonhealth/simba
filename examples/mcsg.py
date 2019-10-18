@@ -1,6 +1,6 @@
 from simba.evaluation import evaluate_multiple
 from simba.similarities import von_mises_correction_aic, von_mises_correction_tic, gaussian_correction_aic, gaussian_correction_tic, spherical_gaussian_correction_aic, spherical_gaussian_correction_tic
-from simba.utils.embedding import get_embeddings
+from simba.core import embed
 
 # A very useful dataset.
 sentences1 = [
@@ -22,8 +22,8 @@ gold_scores = [1, 2, 0]
 # VMF also requires normalised word vectors.
 sentences1 = [s.split() + ['.'] for s in sentences1]
 sentences2 = [s.split() + ['.'] for s in sentences2]
-embeddings1 = get_embeddings(sentences1, embedding='fasttext', norm=True)
-embeddings2 = get_embeddings(sentences2, embedding='fasttext', norm=True)
+embeddings1 = embed(sentences1, embedding='fasttext', norm=True)
+embeddings2 = embed(sentences2, embedding='fasttext', norm=True)
 
 # Compute confidence intervals for dynamax compared to cossim.
 all_scores = evaluate_multiple(

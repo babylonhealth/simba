@@ -1,6 +1,6 @@
 import numpy as np
 
-from simba.utils.linalg import cosine
+from ..utils.linalg import cosine
 
 
 def avg_cosine(x, y):

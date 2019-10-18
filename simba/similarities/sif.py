@@ -1,9 +1,9 @@
 import numpy as np
 
-from simba.utils.linalg import compute_pc, cosine
+from ..utils.linalg import compute_pc, cosine
 
 
-def _avg_sif(x_mean, y_mean, pc):
+def _sif(x_mean, y_mean, pc):
     """
 
     :param x_mean: mean word vector for first sentence
@@ -28,7 +28,7 @@ def batch_avg_sif(xs, ys):
     embs = np.vstack((x_means, y_means))
     pc = compute_pc(embs)
     return [
-        _avg_sif(x, y, pc) for x, y in zip(x_means, y_means)
+        _sif(x, y, pc) for x, y in zip(x_means, y_means)
     ]
 
 

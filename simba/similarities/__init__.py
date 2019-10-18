@@ -12,4 +12,4 @@ from .fuzzy import (
 )
 from .geometry import avg_cosine
 from .mcsg import *
-from .sif import _avg_sif, batch_avg_sif
+from .sif import batch_avg_sif
