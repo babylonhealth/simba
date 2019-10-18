@@ -5,22 +5,11 @@ import numpy as np
 from simba.config import EMB_MAP
 
 
-def _create_dictionary(sequences, threshold=0):
+def _create_dictionary(sequences):
     tokens = {}
     for s in sequences:
         for token in s:
             tokens[token] = tokens.get(token, 0) + 1
-
-    if threshold > 0:
-        new_tokens = {}
-        for token in tokens:
-            if tokens[token] >= threshold:
-                new_tokens[token] = tokens[token]
-        tokens = new_tokens
-    # TODO where are these numbers coming from?
-    tokens['<s>'] = 1e9 + 4
-    tokens['</s>'] = 1e9 + 3
-    tokens['<p>'] = 1e9 + 2
 
     sorted_tokens = sorted(tokens.items(), key=lambda x: -x[1])  # inverse sort
     id2token = []
