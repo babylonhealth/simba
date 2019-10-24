@@ -1,15 +1,7 @@
-from .correlation import (
-    avg_kendall,
-    avg_pearson,
-    avg_spearman,
-    max_spearman,
-)
-from .fuzzy import (
-    dynamax_dice,
-    dynamax_jaccard,
-    dynamax_otsuka,
-    max_jaccard,
-)
+# flake8: noqa
+from .cka import *
+from .correlation import *
+from .fuzzy import *
 from .geometry import avg_cosine
 from .mcsg import *
 from .sif import batch_avg_sif

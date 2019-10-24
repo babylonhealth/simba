@@ -24,7 +24,12 @@ def _create_dictionary(sequences):
     return id2token, token2id
 
 
-def get_embedding_map(embedding_path, sequences, norm=False, path_to_counts=None):
+def get_embedding_map(
+        embedding_path,
+        sequences,
+        norm=False,
+        path_to_counts=None,
+):
     """
 
     :param embedding_path:
@@ -49,7 +54,8 @@ def get_embedding_map(embedding_path, sequences, norm=False, path_to_counts=None
                 if norm:
                     np_vector = np_vector / np.linalg.norm(np_vector)
                 if token_freq_map:
-                    np_vector = _get_token_weight(token, token_freq_map) * np_vector
+                    np_vector = _get_token_weight(
+                        token, token_freq_map) * np_vector
                 embedding_map[token] = np_vector
 
     return embedding_map, dim

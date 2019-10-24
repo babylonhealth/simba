@@ -10,7 +10,7 @@ def to_cartesian(phi):
     :return X [nx(d+1) ndarray]: Dataset in cartesian coordinates
     """
     d = len(phi)
-    X =  np.cos(phi[0])
+    X = np.cos(phi[0])
 
     # can probably be vectorised with a cummulative product
     for i in range(1, d):
@@ -50,7 +50,7 @@ def to_hypersphericalPolars(mu):
     thetas = np.arccos(mu[:-1] / rev_cumnorms[:-1])
 
     norm = la.norm(mu[-2:])
-    thetas[-1] = np.sign(mu[-1]) * np.arccos( mu[-2] / norm )
+    thetas[-1] = np.sign(mu[-1]) * np.arccos(mu[-2] / norm)
     return thetas
 
 
@@ -103,6 +103,8 @@ def log_likelihood(X):
     if np.isinf(kappa) or kappa > 1e+17:
         return np.nan
     besseli = -N * (np.log(ive(V, kappa)) + kappa - V * np.log(kappa))
+    if np.isnan(besseli):
+        print('whoops')
     exponent = kappa * R * N
     return exponent + besseli
 
@@ -139,8 +141,7 @@ def vmf_tic(X):
     hess_diagonal /= N
 
     v = (D / 2 - 1)
-    num = ive(v + 1, kappa) * (ive(v - 1, kappa) + ive(v + 1, kappa)) - ive(v, kappa) * (
-            ive(v, kappa) + ive(v + 2, kappa))
+    num = ive(v + 1, kappa) * (ive(v - 1, kappa) + ive(v + 1, kappa)) - ive(v, kappa) * (ive(v, kappa) + ive(v + 2, kappa))  # noqa
     denom = 2 * ive(v, kappa) ** 2
 
     k_diag = num / denom

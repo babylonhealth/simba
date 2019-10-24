@@ -51,6 +51,8 @@ def cka_factory(kernel=None):
         :param Y: word embedding matrix Y with shape (l x D)
         :return: HSIC (unnormalised) between X and Y
         """
+        X = np.array(X)
+        Y = np.array(Y)
         assert X.shape[1] == Y.shape[1]
         d = X.shape[1]
         H = centering_matrix(d)
@@ -71,6 +73,14 @@ def cka_factory(kernel=None):
     return cka
 
 
+def cka_linear(X, Y):
+    return cka_factory(linear_kernel)(X, Y)
+
+
+def cka_gaussian(X, Y):
+    return cka_factory(gaussian_kernel)(X, Y)
+
+
 def dcorr(X, Y):
     """
     Computes Distance Correlation (dCorr)
@@ -79,4 +89,6 @@ def dcorr(X, Y):
     :param y: Y: word embedding matrix Y with shape (l x D)
     :return: distance correlation between X and Y
     """
+    X = np.array(X)
+    Y = np.array(Y)
     return dcor.distance_correlation(X.T, Y.T)

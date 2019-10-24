@@ -30,5 +30,3 @@ def batch_avg_sif(xs, ys):
     return [
         _sif(x, y, pc) for x, y in zip(x_means, y_means)
     ]
-
-

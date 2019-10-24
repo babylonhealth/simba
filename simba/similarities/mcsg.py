@@ -8,7 +8,8 @@ def von_mises_correction_aic(Dnew, Dc):
     """
     :param Dnew[nxd matrix]: set 1
     :param Dc[mxd matrix]: set 2
-    :return [float]: semantic similarity measure (approximation of the bayes factors)
+    :return [float]: semantic similarity measure
+        (approximation of the bayes factors)
     """
     D = np.concatenate((Dnew, Dc), axis=0)
 
@@ -24,7 +25,8 @@ def von_mises_correction_tic(Dnew, Dc):
     """
     :param Dnew[nxd matrix]: set 1
     :param Dc[mxd matrix]: set 2
-    :return [float]: semantic similarity measure (approximation of the bayes factors)
+    :return [float]: semantic similarity measure
+        (approximation of the bayes factors)
     """
     D = np.concatenate((Dnew, Dc), axis=0)
 
@@ -40,7 +42,8 @@ def gaussian_correction_aic(Dnew, Dc):
     """
     :param Dnew[nxd matrix]: set 1
     :param Dc[mxd matrix]: set 2
-    :return [float]: semantic similarity measure (approximation of the bayes factors)
+    :return [float]: semantic similarity measure
+        (approximation of the bayes factors)
     """
     Dnew = np.array(Dnew)
     Dc = np.array(Dc)
@@ -72,7 +75,8 @@ def spherical_gaussian_correction_aic(Dnew, Dc):
     """
     :param Dnew[nxd matrix]: set 1
     :param Dc[mxd matrix]: set 2
-    :return [float]: semantic similarity measure (approximation of the bayes factors)
+    :return [float]: semantic similarity measure
+        (approximation of the bayes factors)
     """
     D = np.concatenate((Dnew, Dc), axis=0)
 
@@ -87,7 +91,8 @@ def gaussian_correction_tic(Dnew, Dc):
     """
     :param Dnew[nxd matrix]: set 1
     :param Dc[mxd matrix]: set 2
-    :return [float]: semantic similarity measure (approximation of the bayes factors)
+    :return [float]: semantic similarity measure
+        (approximation of the bayes factors)
     """
     D = np.concatenate((Dnew, Dc), axis=0)
 
@@ -104,7 +109,8 @@ def spherical_gaussian_correction_tic(Dnew, Dc):
     """
     :param Dnew[nxd matrix]: set 1
     :param Dc[mxd matrix]: set 2
-    :return [float]: semantic similarity measure (approximation of the bayes factors)
+    :return [float]: semantic similarity measure
+        (approximation of the bayes factors)
     """
     D = np.concatenate((Dnew, Dc), axis=0)
 

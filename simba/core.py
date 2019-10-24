@@ -1,6 +1,8 @@
 import numpy as np
 
-from .config import EMB_MAP, FREQ_MAP, save_config, FREQ_MAP_FILE, logger, EMB_MAP_FILE
+from .config import (
+    EMB_MAP, EMB_MAP_FILE, FREQ_MAP, FREQ_MAP_FILE, logger, save_config
+)
 from .utils.embedding import get_embedding_map, get_token_freq_map
 
 
@@ -36,26 +38,32 @@ def register_frequencies(name, path):
     save_config(FREQ_MAP, FREQ_MAP_FILE)
 
 
-def embed(sequences, embedding, norm=False, frequencies=None):
+def embed(sequences, embedding, norm=False, frequencies=None, pad_token=None):
     """
 
     :param sequences:
     :param embedding:
     :param norm:
     :param frequencies:
+    :param pad_token:
     :return:
     """
+    if pad_token is not None:
+        sequences = [x + [pad_token] for x in sequences]
+
     embeddings = []
     try:
         embs_path = EMB_MAP[embedding]
     except KeyError:
-        logger.error('Embedding name not found, maybe you forgot to register it?')
+        logger.error('Embedding name not found, '
+                     'maybe you forgot to register it?')
         return None
 
     try:
         counts_path = FREQ_MAP[frequencies] if frequencies else None
     except KeyError:
-        logger.error('Frequency name not found, maybe you forgot to register it?')
+        logger.error('Frequency name not found, '
+                     'maybe you forgot to register it?')
         return None
 
     word_vec, dim = get_embedding_map(embs_path, sequences, norm, counts_path)

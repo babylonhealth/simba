@@ -1,5 +1,9 @@
 from simba.evaluation import evaluate_multiple
-from simba.similarities import von_mises_correction_aic, von_mises_correction_tic, gaussian_correction_aic, gaussian_correction_tic, spherical_gaussian_correction_aic, spherical_gaussian_correction_tic
+from simba.similarities import (
+    von_mises_correction_aic, von_mises_correction_tic,
+    gaussian_correction_aic, gaussian_correction_tic,
+    spherical_gaussian_correction_aic, spherical_gaussian_correction_tic
+)
 from simba.core import embed
 
 # A very useful dataset.

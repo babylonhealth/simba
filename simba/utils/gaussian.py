@@ -37,8 +37,8 @@ def tic(X):
     jacob = np.zeros((2 * D,))
     hess = np.zeros((2 * D,))
 
-    grad_mu = lambda x: (x - mu) / var_diag
-    grad_var = lambda x: .5 * (((x - mu) / var_diag) ** 2 - 1 / var_diag)
+    grad_mu = lambda x: (x - mu) / var_diag  # noqa
+    grad_var = lambda x: .5 * (((x - mu) / var_diag) ** 2 - 1 / var_diag)  # noqa
 
     # Jacob of mus
     for n in range(N):
@@ -61,7 +61,7 @@ def tic(X):
     # Fisher is negative of Hessian
     fisher = -hess
 
-    penalty = np.sum(jacob / (fisher + 1e-06) )
+    penalty = np.sum(jacob / (fisher + 1e-06))
 
     score = get_score(X, mu, var_diag)
 
@@ -79,7 +79,7 @@ def fit_covariance_spherical(X, reg_cov=1e-6):
 def get_score_sphere(X, mu, var_diag):
     X = np.array(X)
     N, D = X.shape
-    var_diag =  (var_diag.mean().repeat(D))
+    var_diag = (var_diag.mean().repeat(D))
     log_prob = np.sum((X - mu) ** 2 / var_diag)
     log_det = np.sum(np.log(var_diag))
     return -.5 * (log_prob + N * D * np.log(2 * np.pi) + N * log_det)
@@ -111,8 +111,8 @@ def tic_spherical(X):
     jacob = np.zeros((D + 1,))
     hess = np.zeros((D + 1,))
 
-    grad_mu = lambda x: (x - mu) / var
-    grad_var = lambda x: .5 * np.sum(((x - mu) / var) ** 2 - 1 / var)
+    grad_mu = lambda x: (x - mu) / var  # noqa
+    grad_var = lambda x: .5 * np.sum(((x - mu) / var) ** 2 - 1 / var)  # noqa
 
     # Jacob of mus
     for n in range(N):
@@ -148,4 +148,3 @@ def get_score_vector(X, mu, var_diag):
     log_prob = ((X - mu) ** 2 / var_diag).sum(axis=1)
     log_det = np.sum(np.log(var_diag))
     return -.5 * (log_prob + D * np.log(2 * np.pi) + log_det)[:, None]
-
