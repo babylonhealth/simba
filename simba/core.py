@@ -40,13 +40,14 @@ def register_frequencies(name, path):
 
 def embed(sequences, embedding, norm=False, frequencies=None, pad_token=None):
     """
-
-    :param sequences:
-    :param embedding:
-    :param norm:
-    :param frequencies:
-    :param pad_token:
-    :return:
+    Converts token sequences to embedding sequences
+    :param sequences: list of token sequences
+    :param embedding: name of the embedding to use
+    :param norm: Whether to normalise all embeddings or not
+    :param frequencies: optional name of frequencies, for weighting
+    :param pad_token: If present, pads every sequence with a single instance
+        of this token
+    :return: embedded sequences
     """
     if pad_token is not None:
         sequences = [x + [pad_token] for x in sequences]

@@ -3,6 +3,7 @@ from sklearn.decomposition import TruncatedSVD
 
 
 def cosine(x, y):
+    """Cosine similarity between x and y."""
     return np.dot(x, y) / (np.linalg.norm(x) * np.linalg.norm(y))
 
 

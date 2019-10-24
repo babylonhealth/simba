@@ -5,9 +5,9 @@ import numpy as np
 
 def _create_dictionary(sequences):
     """
-
-    :param sequences:
-    :return:
+    Create id/token mappings for sequences.
+    :param sequences: list of token sequences
+    :return: mappings from id to token, and token to id
     """
     tokens = {}
     for s in sequences:
@@ -31,12 +31,12 @@ def get_embedding_map(
         path_to_counts=None,
 ):
     """
-
-    :param embedding_path:
-    :param sequences:
-    :param norm:
-    :param path_to_counts:
-    :return:
+    Get map from token to embedding for a list of sequences.
+    :param embedding_path: path to embeddings file
+    :param sequences: list of token sequences
+    :param norm: whether to normalise embeddings, default False
+    :param path_to_counts: optional path to word frequency file
+    :return: embedding map and dimensionality of embedding
     """
     embedding_map = {}
     token_freq_map = None

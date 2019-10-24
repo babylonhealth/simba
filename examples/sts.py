@@ -1,4 +1,4 @@
-# Run STS tasks from SentEval.
+# Run STS tasks from SentEval (https://github.com/facebookresearch/SentEval).
 # Note that in general we recommend reproducing paper results using our forks
 # of the official SentEval repository, rather than this script.
 import os
@@ -19,12 +19,12 @@ from simba.core import embed
 STS_DIR = '/Users/april.shen/DATA/STS'
 
 
-def get_sts_data():
+def get_sts_data(sts_dir=STS_DIR):
     print('Loading data...')
     task_dict = {}
 
-    for sts_task in os.listdir(STS_DIR):
-        task_dir = os.path.join(STS_DIR, sts_task)
+    for sts_task in os.listdir(sts_dir):
+        task_dir = os.path.join(sts_dir, sts_task)
         if 'Benchmark' in sts_task or not os.path.isdir(task_dir):
             continue
         print(sts_task)

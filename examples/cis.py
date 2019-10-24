@@ -1,17 +1,18 @@
+# Demonstrate computing confidence intervals.
 from simba.evaluation import evaluate_multiple, confidence_intervals
 from simba.similarities import dynamax_jaccard, avg_cosine
 from simba.core import embed
 
 # A very useful dataset.
 sentences1 = [
-    'she likes cats',
-    'she likes airplanes',
-    'frogs are good',
+    "Remember who you are",
+    "Any story worth telling is worth telling twice",
+    "Being brave doesn’t mean you go looking for trouble",
 ]
 sentences2 = [
-    'he loves dogs',
-    'airplanes are cool',
-    'i have no more milk'
+    "Remember that those kings will always be there to guide you",
+    "Any story worth telling is worth telling twice",
+    "I'm surrounded by idiots"
 ]
 gold_scores = [1, 2, 0]
 

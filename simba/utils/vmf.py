@@ -103,8 +103,6 @@ def log_likelihood(X):
     if np.isinf(kappa) or kappa > 1e+17:
         return np.nan
     besseli = -N * (np.log(ive(V, kappa)) + kappa - V * np.log(kappa))
-    if np.isnan(besseli):
-        print('whoops')
     exponent = kappa * R * N
     return exponent + besseli
 

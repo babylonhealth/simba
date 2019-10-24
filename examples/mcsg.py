@@ -1,3 +1,4 @@
+# Demonstrate usage of model comparison methods.
 from simba.evaluation import evaluate_multiple
 from simba.similarities import (
     von_mises_correction_aic, von_mises_correction_tic,
@@ -8,14 +9,14 @@ from simba.core import embed
 
 # A very useful dataset.
 sentences1 = [
-    'she likes cats',
-    'she likes airplanes',
-    'frogs are good',
+    "Remember who you are",
+    "Any story worth telling is worth telling twice",
+    "Being brave doesn’t mean you go looking for trouble",
 ]
 sentences2 = [
-    'he loves dogs',
-    'airplanes are cool',
-    'i have no more milk',
+    "Remember that those kings will always be there to guide you",
+    "Any story worth telling is worth telling twice",
+    "I'm surrounded by idiots"
 ]
 gold_scores = [1, 2, 0]
 
@@ -24,12 +25,12 @@ gold_scores = [1, 2, 0]
 # so it's advised to pad with an arbitrary (common) word embedding, e.g.
 # '.' or 'the' in the case of text.
 # VMF also requires normalised word vectors.
-sentences1 = [s.split() + ['.'] for s in sentences1]
-sentences2 = [s.split() + ['.'] for s in sentences2]
-embeddings1 = embed(sentences1, embedding='fasttext', norm=True)
-embeddings2 = embed(sentences2, embedding='fasttext', norm=True)
+sentences1 = [s.split() for s in sentences1]
+sentences2 = [s.split() for s in sentences2]
+embeddings1 = embed(sentences1, embedding='fasttext', norm=True, pad_token='.')
+embeddings2 = embed(sentences2, embedding='fasttext', norm=True, pad_token='.')
 
-# Compute confidence intervals for dynamax compared to cossim.
+# Compute results for all AIC/TIC methods.
 all_scores = evaluate_multiple(
     embeddings1,
     embeddings2,
