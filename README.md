@@ -53,5 +53,5 @@ This library contains implementations of methods from the following papers:
 
 ## Contact
 * [April Shen](https://github.com/apriltuesday)
+* [Sasho Savkov](https://github.com/savkov)
 * [Vitalii Zhelezniak](https://github.com/ironvital)
-* [Sasho Savokov](https://github.com/savkov)
