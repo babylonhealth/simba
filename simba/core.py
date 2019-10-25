@@ -7,6 +7,11 @@ from .utils.embedding import get_embedding_map, get_token_freq_map
 
 
 def register_embeddings(name, path):
+    """
+    Register embeddings file.
+    :param name: name to refer to embeddings
+    :param path: path to embeddings file
+    """
     logger.info(f'Registering embeddings {name} from {path}')
     if name in EMB_MAP:
         logger.warning(f'Overwriting old value: {EMB_MAP[name]}')
@@ -23,6 +28,11 @@ def register_embeddings(name, path):
 
 
 def register_frequencies(name, path):
+    """
+    Register frequencies file.
+    :param name: name to refer to frequencies
+    :param path: path to frequencies file
+    """
     logger.info(f'Registering frequencies {name} from {path}')
     if name in FREQ_MAP:
         logger.warning(f'Overwriting old value: {FREQ_MAP[name]}')

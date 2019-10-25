@@ -19,19 +19,24 @@ def evaluate(xs, ys, sim_fn, gold_scores=None):
     return scores
 
 
-def evaluate_multiple(xs, ys, sim_fns, gold_scores=None):
+def evaluate_multiple(xs, ys, sim_fns, gold_scores=None, names=None):
     """
     Compare multiple similarity measures on a dataset of pairs.
     :param xs: first list of sequences of embeddings
     :param ys: second list of sequences of embeddings
     :param sim_fns: similarity measures to evaluate
     :param gold_scores: optional list of gold scores
+    :param names: optional list of names for the similarity functions, which
+        will be keys in the returned dict. If omitted it will default to the
+        __name__ of he function
     :return: dict containing scores and Pearson correlation (if gold scores
         were passed) for each method
     """
+    if names is None:
+        names = [sim_fn.__name__ for sim_fn in sim_fns]
     return {
-        sim_fn.__name__: evaluate(xs, ys, sim_fn, gold_scores)
-        for sim_fn in sim_fns
+        name: evaluate(xs, ys, sim_fn, gold_scores)
+        for name, sim_fn in zip(names, sim_fns)
     }
 
 

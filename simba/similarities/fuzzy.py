@@ -1,7 +1,7 @@
 import numpy as np
 
 
-def fuzzify(s, u):
+def _fuzzify(s, u):
     """
     Sentence fuzzifier.
     Computes membership vector for the sentence S with respect to the
@@ -24,8 +24,8 @@ def dynamax_jaccard(x, y):
     :return: similarity score between the two sentences
     """
     u = np.vstack((x, y))
-    m_x = fuzzify(x, u)
-    m_y = fuzzify(y, u)
+    m_x = _fuzzify(x, u)
+    m_y = _fuzzify(y, u)
 
     m_inter = np.sum(np.minimum(m_x, m_y))
     m_union = np.sum(np.maximum(m_x, m_y))
@@ -40,8 +40,8 @@ def dynamax_otsuka(x, y):
     :return: similarity score between the two sentences
     """
     u = np.vstack((x, y))
-    m_x = fuzzify(x, u)
-    m_y = fuzzify(y, u)
+    m_x = _fuzzify(x, u)
+    m_y = _fuzzify(y, u)
 
     m_inter = np.sum(np.minimum(m_x, m_y))
     m_x_card = np.sum(m_x)
@@ -57,8 +57,8 @@ def dynamax_dice(x, y):
     :return: similarity score between the two sentences
     """
     u = np.vstack((x, y))
-    m_x = fuzzify(x, u)
-    m_y = fuzzify(y, u)
+    m_x = _fuzzify(x, u)
+    m_y = _fuzzify(y, u)
 
     f_inter = np.sum(np.minimum(m_x, m_y))
     m_x_card = np.sum(m_x)
@@ -90,8 +90,8 @@ def fbow_jaccard_factory(u):
     :return: similarity function
     """
     def u_jaccard(x, y):
-        m_x = fuzzify(x, u)
-        m_y = fuzzify(y, u)
+        m_x = _fuzzify(x, u)
+        m_y = _fuzzify(y, u)
 
         m_inter = np.sum(np.minimum(m_x, m_y))
         m_union = np.sum(np.maximum(m_x, m_y))

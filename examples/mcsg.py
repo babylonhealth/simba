@@ -22,8 +22,8 @@ gold_scores = [1, 2, 0]
 
 # Get word embeddings.
 # Note that the VMF methods require more than one embedding per sequence,
-# so it's advised to pad with an arbitrary (common) word embedding, e.g.
-# '.' or 'the' in the case of text.
+# so it's advised to pad with an arbitrary (common) token, e.g. '.' or 'the'
+# in the case of text.
 # VMF also requires normalised word vectors.
 sentences1 = [s.split() for s in sentences1]
 sentences2 = [s.split() for s in sentences2]

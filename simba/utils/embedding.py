@@ -2,6 +2,8 @@ import io
 
 import numpy as np
 
+from simba.config import logger, EMB_MAP
+
 
 def _create_dictionary(sequences):
     """
@@ -95,3 +97,34 @@ def _get_token_weight(token, token_freq_map, a=1e-3):
     """
     token_freq = token_freq_map.get(token, 0.0)
     return a / (a + token_freq)
+
+
+def load_embedding_matrix(embedding, lo=0, hi=None):
+    """
+    Loads embedding vectors into a matrix
+    :param embedding: name of embedding
+    :param lo: start index
+    :param hi: stop index
+    :return: embedding matrix
+    """
+    try:
+        path_to_vec = EMB_MAP[embedding]
+    except KeyError:
+        logger.error('Embedding name not found, '
+                     'maybe you forgot to register it?')
+        return None
+    word_vec_list = []
+
+    with io.open(path_to_vec, 'r', encoding='utf-8') as f:
+        next(f)
+        for idx, line in enumerate(f):
+            if idx < lo:
+                continue
+            if hi and idx >= hi:
+                break
+            word, vec = line.split(' ', 1)
+            np_vector = np.fromstring(vec, sep=' ')
+            word_vec_list.append(np_vector)
+    logger.info('Loaded {0}, Vocab size: {1}'.format(path_to_vec,
+                                                     len(word_vec_list)))
+    return np.array(word_vec_list)
