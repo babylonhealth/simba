@@ -1,0 +1,21 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/simba
+    docker:
+      - image: circleci/python:3.6.4
+    steps:
+      - checkout
+      - run: echo "$CIRCLE_SHA1" > .commit-id
+      - run:
+          name: Install requirements
+          command: |
+            pip install --user -r test_requirements.txt
+      - run:
+          name: Linting
+          command: |
+            python -m flake8 simba
+      - run:
+          name: Testing
+          command: |
+            python -m pytest

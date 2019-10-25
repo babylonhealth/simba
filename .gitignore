@@ -56,7 +56,6 @@ Thumbs.db
 .Spotlight-V100
 .Trashes
 Desktop.ini
-.*
 !.gitignore
 *~
 *.sw[a-p]
@@ -71,5 +70,6 @@ Desktop.ini
 
 
 # Project-specific files
+.idea/
 data/
 *.egg-info/
