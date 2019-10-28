@@ -1,6 +1,9 @@
 import click
 
-from .core import register_embeddings, register_frequencies
+from .core import (
+    register_embeddings, register_frequencies,
+    save_embeddings_config, save_frequencies_config
+)
 from .config import EMB_MAP, FREQ_MAP, print_config
 
 
@@ -37,6 +40,7 @@ def list_freqs():
 def register_emb(name, path):
     """Register a new embeddings file to use."""
     register_embeddings(name, path)
+    save_embeddings_config()
 
 
 @click.command()
@@ -45,6 +49,7 @@ def register_emb(name, path):
 def register_freq(name, path):
     """Register a new frequencies file to use."""
     register_frequencies(name, path)
+    save_frequencies_config()
 
 
 simba.add_command(embs)

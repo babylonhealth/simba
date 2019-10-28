@@ -105,7 +105,7 @@ def get_results(methods, task_dict):
 
         # Print (unweighted) mean Pearson score for each method.
         for method in results:
-            print(f'{method}: {np.mean(results[method])}')
+            print(f'{method}: {np.mean(results[method][0])}')
         print()
 
 

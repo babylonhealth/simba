@@ -39,5 +39,15 @@ def save_config(config_map, filename):
         json.dump(config_map, f)
 
 
+def get_path(key, config_map):
+    # key is either a path or a key in the config map
+    path = None
+    if key in config_map:
+        path = config_map[key]
+    elif os.path.isfile(key):
+        path = key
+    return path
+
+
 EMB_MAP = load_config(EMB_MAP_FILE)
 FREQ_MAP = load_config(FREQ_MAP_FILE)

@@ -46,8 +46,8 @@ of pairs, in the `examples` directory.
 ## References
 This library contains implementations of methods from the following papers:
 * [Arora et al., ICLR 2017. *A Simple but Tough-to-Beat Baseline for Sentence Embeddings*](https://openreview.net/forum?id=SyK00v5xx)
-* [Vargas et al., ICML 2019. *Model Comparison for Semantic Grouping*](http://proceedings.mlr.press/v97/vargas19a.html)
 * [Zhelezniak et al., ICLR 2019. *Don't Settle for Average, Go for the Max: Fuzzy Sets and Max-Pooled Word Vectors*](https://openreview.net/forum?id=SkxXg2C5FX)
+* [Vargas et al., ICML 2019. *Model Comparison for Semantic Grouping*](http://proceedings.mlr.press/v97/vargas19a.html)
 * [Zhelezniak et al., NAACL-HLT 2019. *Correlation Coefficients and Semantic Textual Similarity*](https://www.aclweb.org/anthology/N19-1100/)
 * [Zhelezniak et al., EMNLP-IJCNLP 2019. *Correlations between Word Vector Sets*](https://arxiv.org/abs/1910.02902)
 

@@ -2,7 +2,7 @@ import io
 
 import numpy as np
 
-from simba.config import logger, EMB_MAP
+from simba.config import logger, EMB_MAP, get_path
 
 
 def _create_dictionary(sequences):
@@ -107,9 +107,8 @@ def load_embedding_matrix(embedding, lo=0, hi=None):
     :param hi: stop index
     :return: embedding matrix
     """
-    try:
-        path_to_vec = EMB_MAP[embedding]
-    except KeyError:
+    path_to_vec = get_path(embedding, EMB_MAP)
+    if path_to_vec is None:
         logger.error('Embedding name not found, '
                      'maybe you forgot to register it?')
         return None

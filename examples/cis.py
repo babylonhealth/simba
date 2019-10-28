@@ -30,7 +30,7 @@ all_scores = evaluate_multiple(
 )
 print(all_scores)
 
-dm_scores = all_scores['dynamax_jaccard']
-ac_scores = all_scores['avg_cosine']
+dm_scores = all_scores['dynamax_jaccard'][0]
+ac_scores = all_scores['avg_cosine'][0]
 cis = confidence_intervals(dm_scores, ac_scores, gold_scores)
 print(cis)

@@ -15,8 +15,8 @@ def evaluate(xs, ys, sim_fn, gold_scores=None):
     scores = [sim_fn(x, y) for x, y in zip(xs, ys)]
     if gold_scores is not None:
         prs = pearsonr(gold_scores, scores)[0]
-        return prs, scores
-    return scores
+        return scores, prs
+    return scores, None
 
 
 def evaluate_multiple(xs, ys, sim_fns, gold_scores=None, names=None):
