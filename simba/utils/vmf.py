@@ -5,14 +5,14 @@ import numpy.linalg as la
 
 def to_cartesian(phi):
     """
-    Converts from sphericl hyperpolars
+    Converts from spherical hyperpolars
     :params Phi [nxd ndarray]: array vectors of angles
     :return X [nx(d+1) ndarray]: Dataset in cartesian coordinates
     """
     d = len(phi)
     X = np.cos(phi[0])
 
-    # can probably be vectorised with a cummulative product
+    # can probably be vectorised with a cumulative product
     for i in range(1, d):
         X += np.prod(np.sin(phi[:i]), axis=1) * np.cos(phi[i])
 
@@ -29,7 +29,7 @@ def fit_concentration(X):
     Computes the vMF MLE sol for the concentration parameter
     NOTE: This is an approximate solution to a transcendental eq
     :param X [nxd ndarray]: Design matrix of normalised word vectors
-    :return [float]: MLE concentration paramater solution
+    :return [float]: MLE concentration parameter solution
     """
     X = np.array(X)
     n, d = X.shape

@@ -1,7 +1,7 @@
 import numpy as np
 import pytest
 
-from simba.utils.linalg import cosine, compute_pc
+from simba.utils.linalg import cosine, compute_pc, normalise_rows
 
 
 @pytest.mark.parametrize(
@@ -36,3 +36,17 @@ def test_compute_pc_too_many_components():
     X = np.random.random((4, 5))
     with pytest.raises(ValueError):
         compute_pc(X, npc=11)
+
+
+def test_normalise_rows():
+    X = np.random.random((4, 5))
+    result = normalise_rows(X)
+    for row in result:
+        np.testing.assert_allclose(np.linalg.norm(row), 1)
+
+
+def test_normalise_rows_zero_matrix():
+    X = np.random.random((4, 5))
+    X[0, :] = np.zeros(5)
+    result = normalise_rows(X)
+    assert np.all(np.isnan(result[0]))

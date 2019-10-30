@@ -70,19 +70,8 @@ def tic(X):
 
 def fit_covariance_spherical(X, reg_cov=1e-6):
     variances = np.var(X, axis=0, ddof=0) + reg_cov
-
     spherical = np.mean(variances)
-
     return spherical
-
-
-def get_score_sphere(X, mu, var_diag):
-    X = np.array(X)
-    N, D = X.shape
-    var_diag = (var_diag.mean().repeat(D))
-    log_prob = np.sum((X - mu) ** 2 / var_diag)
-    log_det = np.sum(np.log(var_diag))
-    return -.5 * (log_prob + N * D * np.log(2 * np.pi) + N * log_det)
 
 
 def get_score_spherical(X, mu, var):
@@ -140,11 +129,3 @@ def tic_spherical(X):
     score = get_score_spherical(X, mu, var)
 
     return - 2 * (score - penalty)
-
-
-def get_score_vector(X, mu, var_diag):
-    X = np.array(X)
-    N, D = X.shape
-    log_prob = ((X - mu) ** 2 / var_diag).sum(axis=1)
-    log_det = np.sum(np.log(var_diag))
-    return -.5 * (log_prob + D * np.log(2 * np.pi) + log_det)[:, None]
