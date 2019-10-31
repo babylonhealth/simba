@@ -1,5 +1,5 @@
 import pytest
-from simba.utils import embedding
+from simba.utils.embedding import _create_dictionary
 
 
 @pytest.mark.parametrize(
@@ -11,7 +11,7 @@ from simba.utils import embedding
          (['Hakuna', 'Matata', 'What', 'a', 'wonderful', 'phrase'], {'Hakuna': 0, 'Matata': 1, 'What': 2, 'a': 3, 'wonderful': 4, 'phrase': 5})),
     ]
 )
-def test_embedding_create_dictionary(test_pairs):
+def test_create_dictionary(test_pairs):
     input_, expected = test_pairs
-    output_ = embedding._create_dictionary(input_)
+    output_ = _create_dictionary(input_)
     assert expected == output_
