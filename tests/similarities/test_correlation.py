@@ -13,7 +13,7 @@ def test_avg_pearson():
     for _ in range(5):
         samples = np.random.multivariate_normal(
             mean=np.zeros(2),
-            cov=np.array([[1, 1], [1, 1]]),
+            cov=np.ones((2, 2)),
             size=10
         )
         x.append(samples[:, 0])
@@ -32,7 +32,7 @@ def test_avg_spearman():
     for _ in range(5):
         samples = np.random.multivariate_normal(
             mean=np.zeros(2),
-            cov=np.array([[1, 1], [1, 1]]),
+            cov=np.ones((2, 2)),
             size=10
         )
         x.append(samples[:, 0])
@@ -51,7 +51,7 @@ def test_avg_kendall():
     for _ in range(5):
         samples = np.random.multivariate_normal(
             mean=np.zeros(2),
-            cov=np.array([[1, 1], [1, 1]]),
+            cov=np.ones((2, 2)),
             size=10
         )
         x.append(samples[:, 0])
@@ -70,7 +70,7 @@ def test_max_spearman():
     for _ in range(5):
         samples = np.random.multivariate_normal(
             mean=np.zeros(2),
-            cov=np.array([[1, 1], [1, 1]]),
+            cov=np.ones((2, 2)),
             size=10
         )
         x.append(samples[:, 0])
