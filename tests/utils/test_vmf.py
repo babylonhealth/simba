@@ -2,8 +2,8 @@ import numpy as np
 import pytest
 
 from simba.utils.linalg import normalise_rows
-from simba.utils.vmf import vmf_aic, vmf_tic
-
+from simba.utils.vmf import to_cartesian, vmf_aic, vmf_tic
+from tests.conftest import INPUTS_
 
 # TODO why are these okay?
 good_xs = [
@@ -17,15 +17,58 @@ bad_xs = [
     np.ones((5, 100)) / np.sqrt(100),
 ]
 
+carth_outputs_ = [
+    "E", np.array([0.54030231, 1.]), 
+    "E", np.array([1., 1.]), 
+    np.array([1.660455, 1.660455]), "E"
+]
+
+vmf_aic_outputs_ = [
+    3.26136446, 4.58170763, 
+    "NaN", "NaN", 
+    "NaN", 6.64525188
+]
+
+vmf_tic_outputs_ = [
+    0.29796992, 0.38251421, 
+    "NaN", "NaN", 
+    "NaN", 8.32262594
+]
+
+
+@pytest.mark.parametrize('X,Y', zip(INPUTS_, carth_outputs_))
+def test_to_carthesian(X, Y):
+    if str(Y) == "E":
+        with pytest.raises(ValueError):
+            to_cartesian(X)
+    else:
+        assert np.allclose(to_cartesian(X), Y, atol=1e-8)
+
 
 @pytest.mark.parametrize('X', good_xs)
 def test_vmf_aic(X):
     assert np.isfinite(vmf_aic(X))
 
 
+@pytest.mark.parametrize('X,Y', zip(INPUTS_, vmf_aic_outputs_))
+def test_vmf_aic_num(X, Y):
+    if str(Y) == "NaN":
+        assert np.isnan(vmf_aic(X))
+    else:
+        assert np.allclose(vmf_aic(X), Y, atol=1e-8)
+
+
 @pytest.mark.parametrize('X', good_xs)
 def test_vmf_tic(X):
     assert np.isfinite(vmf_tic(X))
+
+
+@pytest.mark.parametrize('X,Y', zip(INPUTS_, vmf_tic_outputs_))
+def test_vmf_tic_num(X, Y):
+    if str(Y) == "NaN":
+        assert np.isnan(vmf_tic(X))
+    else:
+        assert np.allclose(vmf_tic(X), Y, atol=1e-8)
 
 
 @pytest.mark.parametrize('X', bad_xs)
