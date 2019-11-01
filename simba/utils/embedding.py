@@ -53,6 +53,7 @@ def get_embedding_map(
             token, vec = line.split(' ', 1)
             if token in token2id:
                 np_vector = np.fromstring(vec, sep=' ')
+                assert np_vector.shape[0] == dim
                 if norm:
                     np_vector = np_vector / np.linalg.norm(np_vector)
                 if token_freq_map:
