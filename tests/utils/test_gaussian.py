@@ -10,14 +10,41 @@ xs = [
 ]
 
 
+inputs_ = [
+    np.eye(3),
+    np.eye(3, 2),
+    np.zeros((3, 3)),
+    np.zeros((3, 2)),
+    np.matrix([np.linspace(1, 5, 5), np.linspace(2, -4, 5), np.linspace(-10, -15, 5)])
+]
+
+aic_outputs_ = [
+    24.00419702, 16.00279802, -178.69176477, -119.12784318, 119.25944763
+]
+
+tic_outputs_ = [
+    19.50419554, 13.00279702, -193.69176477, -129.12784318, 111.74772509
+]
+
+
 @pytest.mark.parametrize('X', xs)
 def test_aic(X):
     assert np.isfinite(aic(X))
 
 
+@pytest.mark.parametrize('X,Y', zip(inputs_, aic_outputs_))
+def test_aic_num(X, Y):
+   assert np.isclose(aic(X), Y, atol=1e-8)
+
+
 @pytest.mark.parametrize('X', xs)
 def test_tic(X):
     assert np.isfinite(tic(X))
+
+
+@pytest.mark.parametrize('X,Y', zip(inputs_, tic_outputs_))
+def test_tic_num(X, Y):
+   assert np.isclose(tic(X), Y, atol=1e-8)
 
 
 def test_aic_different_distributions():
