@@ -5,13 +5,17 @@ from simba.utils.linalg import normalise_rows
 from simba.utils.vmf import to_cartesian, vmf_aic, vmf_tic
 from tests.conftest import INPUTS_
 
-# TODO why are these okay?
+
 good_xs = [
-    np.array([[1, 2, 3, 4, 5]]),
-    np.array([[1, 2, 3], [4, 5, 6]]),
+    np.array([[1, 0], [1 / np.sqrt(2), 1 / np.sqrt(2)]]),
+    np.array([
+        np.divide([1, 2, 3, 4, 5], np.sqrt(55)),
+        np.divide([6, 7, 8, 9, 0], np.sqrt(230))
+    ])
 ]
 
 bad_xs = [
+    np.array([[1, 2, 3, 4, 5]]) / np.sqrt(55),
     np.zeros((3, 3)),
     np.ones((3, 100)),
     np.ones((5, 100)) / np.sqrt(100),
