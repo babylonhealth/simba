@@ -27,6 +27,7 @@ tic_spherical_outputs_ = [
     18.00417002, 12.16944618, -116.79870142, -75.865800949, -75.865800949, -116.79870142, 111.11225760
 ]
 
+
 @pytest.mark.parametrize('X', xs)
 def test_aic(X):
     assert np.isfinite(aic(X))

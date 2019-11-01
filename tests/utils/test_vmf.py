@@ -67,6 +67,7 @@ def test_vmf_tic(X):
     assert np.isfinite(vmf_tic(X))
 
 
+
 @pytest.mark.parametrize('X,Y', zip(INPUTS_, vmf_tic_outputs_))
 def test_vmf_tic_num(X, Y):
     if str(Y) == "NaN":
