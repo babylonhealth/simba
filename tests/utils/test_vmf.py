@@ -115,6 +115,3 @@ def test_vmf_tic_different_distributions():
     Y = np.random.dirichlet(alpha=np.random.random(3), size=4)
     Y = normalise_rows(Y)
     assert vmf_tic(X) > vmf_tic(Y)
-
-
-# TODO test for log_VMF_gradient, log_likelihood?
