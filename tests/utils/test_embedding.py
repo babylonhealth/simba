@@ -33,6 +33,12 @@ def test_get_embedding_map():
     assert str(expected) == str(output_)
 
 
+def test_get_embedding_map_wrong_dim():
+    seq = [["hakuna", "matata"], ["matata", "hakuna"]]
+    with pytest.raises(AssertionError):
+        get_embedding_map("tests/fixtures/test_embed_wrong_dim.txt", seq)
+
+
 def test_get_embedding_map_OOV():
     expected = ({}, 5)
     seq = [["problem-free", "philosophy"]]
