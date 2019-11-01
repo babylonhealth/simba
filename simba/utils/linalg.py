@@ -21,3 +21,8 @@ def compute_pc(X, npc=1):
     svd = TruncatedSVD(n_components=npc, n_iter=7, random_state=0)
     svd.fit(X)
     return svd.components_
+
+
+def normalise_rows(X):
+    """Normalise the rows of the matrix X, using L2 norm."""
+    return X / np.linalg.norm(X, axis=1)[:, np.newaxis]
