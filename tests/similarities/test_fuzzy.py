@@ -1,7 +1,8 @@
 import numpy as np
 
 from simba.similarities import (
-    dynamax_dice, dynamax_otsuka, dynamax_jaccard, max_jaccard
+    dynamax_dice, dynamax_otsuka, dynamax_jaccard, max_jaccard,
+    fbow_jaccard_factory
 )
 
 
@@ -89,4 +90,35 @@ def test_dynamax_otsuka():
     assert dynamax_otsuka(x, y1) > dynamax_otsuka(x, y2)
 
 
-# TODO tests for fbow factory
+def test_fbow_jaccard_factory_identity():
+    x = np.array([
+        [1, 0, 0],
+        [2, 1, 0]
+    ])
+    y = np.array([
+        [2, 1, 0],
+        [5, 0, 5],
+        [1, 4, 1]
+    ])
+
+    # Identity as universe is same as maxpool jaccard
+    U = np.eye(3)
+    sim_fn = fbow_jaccard_factory(U)
+    assert np.isclose(sim_fn(x, y), max_jaccard(x, y))
+
+
+def test_fbow_jaccard_factory_sequences():
+    x = np.array([
+        [1, 0, 0],
+        [2, 1, 0]
+    ])
+    y = np.array([
+        [2, 1, 0],
+        [5, 0, 5],
+        [1, 4, 1]
+    ])
+
+    # Sequence embeddings as universe is same as dynamax jaccard
+    U = np.vstack((x, y))
+    sim_fn = fbow_jaccard_factory(U)
+    assert np.isclose(sim_fn(x, y), dynamax_jaccard(x, y))

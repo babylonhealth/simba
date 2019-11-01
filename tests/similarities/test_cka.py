@@ -58,6 +58,3 @@ def test_cka_gaussian():
 
     # Score for correlated vectors should be higher.
     assert cka_gaussian(x, y1) > cka_gaussian(x, y2)
-
-
-# TODO tests for CKA factory
