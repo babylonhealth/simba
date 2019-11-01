@@ -48,5 +48,6 @@ def test_normalise_rows():
 def test_normalise_rows_zero_matrix():
     X = np.random.random((4, 5))
     X[0, :] = np.zeros(5)
-    result = normalise_rows(X)
-    assert np.all(np.isnan(result[0]))
+    with pytest.warns(RuntimeWarning):
+        result = normalise_rows(X)
+        assert np.all(np.isnan(result[0]))
