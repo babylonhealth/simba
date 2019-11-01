@@ -35,7 +35,10 @@ def print_config(config_map):
 
 def save_config(config_map, filename):
     logger.debug(f'Saving config map to {filename}')
-    with open(filename, 'w+') as f:
+    file_path = Path(filename)
+    if not file_path.parent.exists():
+        Path.mkdir(file_path.parent, parents=True)
+    with open(file_path, 'w+') as f:
         json.dump(config_map, f)
 
 
