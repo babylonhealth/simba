@@ -8,6 +8,7 @@ from simba.utils.embedding import (_create_dictionary, _get_token_weight,
 EMBED_PATH = "tests/fixtures/test_embed.txt"
 FREQ_PATH = "tests/fixtures/test_freq.txt"
 
+
 @pytest.mark.parametrize(
     'test_pairs',
     [
@@ -28,6 +29,13 @@ def test_get_embedding_map():
                  'matata': np.linspace(0.5, 0.1, 5)},
                 5)
     seq = [["hakuna", "matata"], ["matata", "hakuna"]]
+    output_ = get_embedding_map(EMBED_PATH, seq)
+    assert str(expected) == str(output_)
+
+
+def test_get_embedding_map_OOV():
+    expected = ({}, 5)
+    seq = [["problem-free", "philosophy"]]
     output_ = get_embedding_map(EMBED_PATH, seq)
     assert str(expected) == str(output_)
 
@@ -70,11 +78,23 @@ def test_get_token_weight(test_pairs):
     assert expected == output_
 
 
+@pytest.mark.parametrize(
+    'test_pairs',
+    [('problem-free', 1.0),
+     ('philosophy', 1.0)]
+)
+def test_get_token_weight_OOV(test_pairs):
+    input_, expected = test_pairs
+    freq_map = get_token_freq_map(FREQ_PATH)
+    output_ = _get_token_weight(input_, freq_map)
+    assert expected == output_
+
+
 def test_load_embedding_matrix(monkeypatch):
     def patch_get_path(embedding, EMB_MAP):
         return EMBED_PATH
     monkeypatch.setattr("simba.utils.embedding.get_path", patch_get_path)
     expected = np.array([np.linspace(0.1, 0.5, 5),
-                np.linspace(0.5, 0.1, 5)])
+                         np.linspace(0.5, 0.1, 5)])
     output_ = load_embedding_matrix("test")
     assert str(expected) == str(output_)
