@@ -6,6 +6,16 @@ from simba.core import embed
 
 EMBED_PATH_LARGE = "tests/fixtures/test_embed_large.txt"
 
+SENTENCES1 = ["In the jungle the mighty jungle",
+              "The lion sleeps tonight",
+              "Hush my darling do not fear my darling",
+              "The lion sleeps tonight"]
+
+SENTENCES2 = ["Near the village the peaceful village",
+              "The lion sleeps tonight",
+              "My little darling",
+              "Do not fear my little darling"]
+
 
 def patch_get_path(embedding, EMB_MAP):
     return EMBED_PATH_LARGE
@@ -21,17 +31,9 @@ def test_end_to_end(monkeypatch):
 
 def test_evaluate(monkeypatch):
     monkeypatch.setattr("simba.core.get_path", patch_get_path)
-    sentences1 = ["In the jungle the mighty jungle",
-                  "The lion sleeps tonight",
-                  "Hush my darling do not fear my darling",
-                  "The lion sleeps tonight"]
-    sentences2 = ["Near the village the peaceful village",
-                  "The lion sleeps tonight",
-                  "My little darling",
-                  "Do not fear my little darling"]
-    embeddings1 = embed([s.split() for s in sentences1],
+    embeddings1 = embed([s.split() for s in SENTENCES1],
                         embedding='test_large')
-    embeddings2 = embed([s.split() for s in sentences2],
+    embeddings2 = embed([s.split() for s in SENTENCES2],
                         embedding='test_large')
     expected, expected_cor = [[0.53112996, 1.0, 0.65611832, 0.40853999], None]
     output_, output_cor = evaluate(embeddings1, embeddings2, dynamax_jaccard)
@@ -41,18 +43,10 @@ def test_evaluate(monkeypatch):
 
 def test_evaluate_gold(monkeypatch):
     monkeypatch.setattr("simba.core.get_path", patch_get_path)
-    sentences1 = ["In the jungle the mighty jungle",
-                  "The lion sleeps tonight",
-                  "Hush my darling do not fear my darling",
-                  "The lion sleeps tonight"]
-    sentences2 = ["Near the village the peaceful village",
-                  "The lion sleeps tonight",
-                  "My little darling",
-                  "Do not fear my little darling"]
     gold_labels = [3, 5, 4, 1]
-    embeddings1 = embed([s.split() for s in sentences1],
+    embeddings1 = embed([s.split() for s in SENTENCES1],
                         embedding='test_large')
-    embeddings2 = embed([s.split() for s in sentences2],
+    embeddings2 = embed([s.split() for s in SENTENCES2],
                         embedding='test_large')
     expected, expected_cor = [[0.53112996, 1.0, 0.65611832, 0.40853999],
                               0.91116447]
@@ -64,17 +58,9 @@ def test_evaluate_gold(monkeypatch):
 
 def test_evaluate_multiple(monkeypatch):
     monkeypatch.setattr("simba.core.get_path", patch_get_path)
-    sentences1 = ["In the jungle the mighty jungle",
-                  "The lion sleeps tonight",
-                  "Hush my darling do not fear my darling",
-                  "The lion sleeps tonight"]
-    sentences2 = ["Near the village the peaceful village",
-                  "The lion sleeps tonight",
-                  "My little darling",
-                  "Do not fear my little darling"]
-    embeddings1 = embed([s.split() for s in sentences1],
+    embeddings1 = embed([s.split() for s in SENTENCES1],
                         embedding='test_large')
-    embeddings2 = embed([s.split() for s in sentences2],
+    embeddings2 = embed([s.split() for s in SENTENCES2],
                         embedding='test_large')
     scores = evaluate_multiple(embeddings1, embeddings2,
                                [dynamax_jaccard, avg_cosine])
