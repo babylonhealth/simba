@@ -43,13 +43,33 @@ sim = dynamax_jaccard(x, y)
 There are more examples, including comparing different similarity metrics on a dataset
 of pairs, in the `examples` directory.
 
-## References
-This library contains implementations of methods from the following papers:
-* [Arora et al., ICLR 2017. *A Simple but Tough-to-Beat Baseline for Sentence Embeddings*](https://openreview.net/forum?id=SyK00v5xx)
-* [Zhelezniak et al., ICLR 2019. *Don't Settle for Average, Go for the Max: Fuzzy Sets and Max-Pooled Word Vectors*](https://openreview.net/forum?id=SkxXg2C5FX)
-* [Vargas et al., ICML 2019. *Model Comparison for Semantic Grouping*](http://proceedings.mlr.press/v97/vargas19a.html)
-* [Zhelezniak et al., NAACL-HLT 2019. *Correlation Coefficients and Semantic Textual Similarity*](https://www.aclweb.org/anthology/N19-1100/)
-* [Zhelezniak et al., EMNLP-IJCNLP 2019. *Correlations between Word Vector Sets*](https://arxiv.org/abs/1910.02902)
+## Similarity Measures
+
+This library contains implementations of the following methods in `simba.similarities`.
+Please consider citing the corresponding papers in your work if you find them useful.
+
+| Method | Description | Paper |
+| - | - | - |
+| `avg_cosine` | Average vector compared with cosine similarity | - |
+| `batch_avg_pca`  | Average vector with principal component removal | [1] |
+| `fbow_jaccard_factory` | Factory method for general fuzzy bag-of-words given a universe matrix | [2] |
+| `max_jaccard` | Max-pooled vectors compared with Jaccard coefficient | [2] |
+| `dynamax_{jaccard, otsuka, dice}` | DynaMax using Jaccard, Otsuka-Ochiai, and Dice coefficients | [2] |
+| `gaussian_correction_{tic, aic}` | Takeuchi and Akaike Information Criteria (TIC and AIC) for Gaussian likelihood | [3] |
+| `spherical_gaussian_correction_{tic, aic}` | TIC and AIC for spherical Gaussian likelihood | [3] |
+| `von_mises_correction_{tic, aic}` | TIC and AIC for von Mises Fisher likelihood | [3] |
+| `avg_{pearson, spearman, kendall}` | Average vector compared with Pearson, Spearman, and Kendall correlation | [4] |
+| `max_spearman` | Max-pooled vectors compared with Spearman correlation | [5] |
+| `cka_factory` | Factory method for general Centered Kernel Alignment (CKA) | [5] |
+| `cka_{linear, gaussian}`| CKA with linear and Gaussian kernels | [5] |
+| `dcorr` | CKA with distance kernel (distance correlation) | [5] |
+
+Papers:
+1. [Arora et al., ICLR 2017. *A Simple but Tough-to-Beat Baseline for Sentence Embeddings*](https://openreview.net/forum?id=SyK00v5xx)
+2. [Zhelezniak et al., ICLR 2019. *Don't Settle for Average, Go for the Max: Fuzzy Sets and Max-Pooled Word Vectors*](https://openreview.net/forum?id=SkxXg2C5FX)
+3. [Vargas et al., ICML 2019. *Model Comparison for Semantic Grouping*](http://proceedings.mlr.press/v97/vargas19a.html)
+4. [Zhelezniak et al., NAACL-HLT 2019. *Correlation Coefficients and Semantic Textual Similarity*](https://www.aclweb.org/anthology/N19-1100/)
+5. [Zhelezniak et al., EMNLP-IJCNLP 2019. *Correlations between Word Vector Sets*](https://arxiv.org/abs/1910.02902)
 
 ## Contact
 * [April Shen](https://github.com/apriltuesday)
