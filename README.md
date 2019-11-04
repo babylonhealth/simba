@@ -54,7 +54,7 @@ Please consider citing the corresponding papers in your work if you find them us
 | `batch_avg_pca`  | Average vector with principal component removal | [1] |
 | `fbow_jaccard_factory` | Factory method for general fuzzy bag-of-words given a universe matrix | [2] |
 | `max_jaccard` | Max-pooled vectors compared with Jaccard coefficient | [2] |
-| `dynamax_{jaccard, otsuka, dice}` | DynaMax compared with Jaccard, Otsuka-Ochiai, and Dice coefficients | [2] |
+| `dynamax_{jaccard, otsuka, dice}` | DynaMax using Jaccard, Otsuka-Ochiai, and Dice coefficients | [2] |
 | `gaussian_correction_{tic, aic}` | Takeuchi and Akaike Information Criteria (TIC and AIC) for Gaussian likelihood | [3] |
 | `spherical_gaussian_correction_{tic, aic}` | TIC and AIC for spherical Gaussian likelihood | [3] |
 | `von_mises_correction_{tic, aic}` | TIC and AIC for von Mises Fisher likelihood | [3] |
