@@ -1,3 +1,4 @@
+import numpy as np
 from scipy.stats import pearsonr
 import scikits.bootstrap as bootstrap
 
@@ -12,7 +13,10 @@ def evaluate(xs, ys, sim_fn, gold_scores=None):
     :return: similarity score for each pair, and Pearson correlation
         (if gold scores were passed)
     """
-    scores = [sim_fn(x, y) for x, y in zip(xs, ys)]
+    scores = [
+        np.nan_to_num(sim_fn(np.nan_to_num(x), np.nan_to_num(y)))
+        for x, y in zip(xs, ys)
+    ]
     if gold_scores is not None:
         prs = pearsonr(gold_scores, scores)[0]
         return scores, prs

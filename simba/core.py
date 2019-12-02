@@ -1,3 +1,5 @@
+import os
+
 import numpy as np
 
 from .config import (
@@ -13,6 +15,7 @@ def register_embeddings(name, path):
     :param name: name to refer to embeddings
     :param path: path to embeddings file
     """
+    path = os.path.expanduser(path)
     logger.info(f'Registering embeddings {name} from {path}')
     if name in EMB_MAP:
         logger.warning(f'Overwriting old value: {EMB_MAP[name]}')
@@ -33,6 +36,7 @@ def register_frequencies(name, path):
     :param name: name to refer to frequencies
     :param path: path to frequencies file
     """
+    path = os.path.expanduser(path)
     logger.info(f'Registering frequencies {name} from {path}')
     if name in FREQ_MAP:
         logger.warning(f'Overwriting old value: {FREQ_MAP[name]}')

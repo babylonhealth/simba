@@ -1,7 +1,7 @@
 import numpy as np
 
 from simba.similarities import dynamax_jaccard, avg_cosine
-from simba.evaluation import evaluate, evaluate_multiple, confidence_intervals
+from simba.evaluation import evaluate, evaluate_multiple
 from simba.core import embed
 
 EMBED_PATH_LARGE = "tests/fixtures/test_embed_large.txt"
@@ -23,7 +23,7 @@ def patch_get_path(embedding, EMB_MAP):
 
 def test_end_to_end(monkeypatch):
     monkeypatch.setattr("simba.core.get_path", patch_get_path)
-    
+
     sentences = ["In the jungle the mighty jungle", "The lion sleeps tonight"]
     x, y = embed([s.split() for s in sentences], embedding='test_large')
     assert np.isclose(dynamax_jaccard(x, y), 0.47254264, atol=1e-8)
