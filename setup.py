@@ -16,7 +16,7 @@ with open('README.md', 'r', encoding='utf-8') as f:
 
 setup(
     name='simba',
-    version='0.1.0',
+    version='0.1.1',
     packages=find_packages('.', exclude=('tests',)),
     zip_safe=True,
     include_package_data=False,
